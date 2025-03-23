@@ -1,6 +1,5 @@
 <?php
 session_start();
-include_once("../config/database.php");
 
 if (isset($_SESSION['user_id'])) {
     header("Location: dashboard.php");
@@ -13,7 +12,7 @@ if (isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>    
+    <title>Login | BacaPoint</title>    
     <link rel="stylesheet" href="../assets/styles.css">
 
 </head>
@@ -28,6 +27,7 @@ if (isset($_SESSION['user_id'])) {
                 <input type="password" name="password" placeholder="Password" required>
                 <button type="submit">Login</button>
             </form>
+            <p>Belum punya akun? <a href="register.php">Daftar</a></p>
         </div>
     </div>
 </body>
