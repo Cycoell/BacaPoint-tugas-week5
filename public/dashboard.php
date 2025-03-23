@@ -1,13 +1,13 @@
 <?php
 session_start();
-include '../config/database.php';
-
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
+include '../config/database.php';
 
-$user_id = $_SESSION['user_id'];
+// Ambil data buku dari tabel book_list
+$result = $conn->query("SELECT * FROM book_list");
 ?>
 
 <!DOCTYPE html>
@@ -15,43 +15,36 @@ $user_id = $_SESSION['user_id'];
 <head>
     <meta charset="UTF-8">
     <title>Dashboard - BacaPoint</title>
+    <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
-    <h2>Selamat datang, <?php echo $_SESSION['username']; ?>!</h2>
-    <a href="library.php">Lihat Library</a> | 
-    <a href="../process/logout.php">Logout</a>
-    
-    <h3>Daftar Buku</h3>
-    <form method="GET">
-        <input type="text" name="search" placeholder="Cari buku...">
-        <button type="submit">Cari</button>
-    </form>
 
-    <table border="1">
+<div class="navbar">BacaPoint - Dashboard</div>
+
+<div class="dashboard-container">
+    <h2>Daftar Buku</h2>
+    <table>
         <tr>
-            <th>Judul</th>
-            <th>Penulis</th>
-            <th>Halaman</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Pages</th>
+            <th>Genre</th>
             <th>Aksi</th>
         </tr>
-        <?php
-        $search = $_GET['search'] ?? '';
-        $query = "SELECT * FROM book_list WHERE title LIKE ?";
-        $stmt = $conn->prepare($query);
-        $search_param = "%$search%";
-        $stmt->bind_param("s", $search_param);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr>
-                <td>{$row['title']}</td>
-                <td>{$row['author']}</td>
-                <td>{$row['pages']}</td>
-                <td><a href='../process/add_book.php?title={$row['title']}&author={$row['author']}&pages={$row['pages']}'>Tambah ke Library</a></td>
-            </tr>";
-        }
-        ?>
+        <?php while ($row = $result->fetch_assoc()) { ?>
+            <tr>
+                <td><?= htmlspecialchars($row['title']) ?></td>
+                <td><?= htmlspecialchars($row['author']) ?></td>
+                <td><?= htmlspecialchars($row['pages']) ?></td>
+                <td><?= htmlspecialchars($row['genre']) ?></td>
+                <td>
+                    <a href="../process/add_book.php?title=<?= urlencode($row['title']) ?>&author=<?= urlencode($row['author']) ?>&pages=<?= $row['pages'] ?>" class="action-button add-button">Tambahkan</a>
+                </td>
+            </tr>
+        <?php } ?>
     </table>
+</div>
+    <a href="library.php">Library</a>
+    <a href="../process/logout.php">Logout</a>
 </body>
 </html>

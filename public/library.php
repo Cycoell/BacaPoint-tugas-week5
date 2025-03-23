@@ -15,18 +15,22 @@ $user_id = $_SESSION['user_id'];
 <head>
     <meta charset="UTF-8">
     <title>Library - BacaPoint</title>
+    <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
-    <h2>Library Anda</h2>
-    <a href="dashboard.php">Kembali ke Dashboard</a> | 
-    <a href="../process/logout.php">Logout</a>
 
-    <table border="1">
+<div class="navbar">BacaPoint - Library</div>
+
+<div class="container">
+    <h3>Library Anda</h3>
+    <a class="button" href="dashboard.php">Kembali ke Dashboard</a>
+
+    <table>
         <tr>
-            <th>Judul</th>
-            <th>Penulis</th>
-            <th>Halaman</th>
-            <th>Status</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Pages</th>
+            <th>Genre</th>
             <th>Aksi</th>
         </tr>
         <?php
@@ -41,11 +45,13 @@ $user_id = $_SESSION['user_id'];
                 <td>{$row['title']}</td>
                 <td>{$row['author']}</td>
                 <td>{$row['pages']}</td>
-                <td>{$row['status']}</td>
-                <td><a href='../process/delete_book.php?book_id={$row['id']}'>Hapus</a></td>
+                <td>{$row['genre']}</td>
+                <td><a class='button' href='../process/delete_book.php?book_id={$row['id']}'>Hapus</a></td>
             </tr>";
         }
         ?>
     </table>
+</div>
+
 </body>
 </html>

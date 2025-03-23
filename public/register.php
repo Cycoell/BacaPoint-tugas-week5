@@ -1,21 +1,32 @@
 <?php
-include_once("../config/database.php");
+session_start();
+if (isset($_SESSION['user_id'])) {
+    header("Location: dashboard.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrasi | Baca Point</title>
+    <title>Register - BacaPoint</title>
+    <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
-    <h2>Registrasi</h2>
-    <form action="../process/register_process.php" method="POST">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit" >Daftar</button>
-    </form>
+
+<div class="container">
+    <div class="form-box">
+        <h2>Daftar ke BacaPoint</h2>
+        <form action="../process/register_process.php" method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit" class="button secondary">Daftar</button>
+        </form>
+        <p>Sudah punya akun? <a href="login.php">Login</a></p>
+    </div>
+</div>
+
 </body>
 </html>
