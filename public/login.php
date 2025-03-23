@@ -1,7 +1,9 @@
 <?php
 session_start();
+include_once("../config/database.php");
+
 if (isset($_SESSION['user_id'])) {
-    header("Location: public/dashboard.php");
+    header("Location: dashboard.php");
     exit();
 } 
 ?>
@@ -21,7 +23,7 @@ if (isset($_SESSION['user_id'])) {
     <div class="login-container">
         <div class="login-box">
             <h2>Login</h2>
-            <form action="process_login.php" method="POST">
+            <form action="../process/login_proces.php" method="POST">
                 <input type="text" name="username" placeholder="Username" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <button type="submit">Login</button>

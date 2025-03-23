@@ -1,8 +1,7 @@
-session_start();
-var_dump($_SESSION);
-
 <?php
 session_start();
+include_once("../config/database.php");
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../index.php"); // ini bener
     exit();
@@ -17,6 +16,8 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 <body>
     <h2>Selamat datang, <?php echo $_SESSION['username']; ?>!</h2>
+
+    <a href="library.php">Library</a>
     <a href="../process/logout.php">Logout</a>
 </body>
 </html>

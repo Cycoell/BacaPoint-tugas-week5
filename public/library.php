@@ -35,17 +35,18 @@ $result = $stmt->get_result();
 
     <h3>Hasil Pencarian:</h3>
     <ul>
-        <?php while ($book = $result->fetch_assoc()): ?>
-            <li>
-                <?= htmlspecialchars($book['title']) ?> - <?= htmlspecialchars($book['author']) ?>
-                <a href="../process/add_book.php?title=<?= urlencode($book['title']) ?>&author=<?= urlencode($book['author']) ?>&pages=<?= $book['pages'] ?>">Tambah ke Library</a>
-            </li>
-        <?php endwhile; ?>
+        <?php if ($result->num_rows > 0): ?>
+            <?php while ($book = $result->fetch_assoc()): ?>
+                <li>
+                    <?= htmlspecialchars($book['title']) ?> - <?= htmlspecialchars($book['author']) ?>
+                    <a href="../process/add_book.php?title=<?= urlencode($book['title']) ?>&author=<?= urlencode($book['author']) ?>&pages=<?= $book['pages'] ?>">Tambah ke Library</a>
+                    <a href="../process/delete_book.php?book_id=<?= $book['id'] ?>">Hapus</a>
+                </li>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <li>Tidak ada buku yang ditemukan.</li>
+        <?php endif; ?>
     </ul>
-    <li>
-    <?= htmlspecialchars($book['title']) ?> - <?= htmlspecialchars($book['author']) ?>
-    <a href="../process/delete_book.php?book_id=<?= $book['id'] ?>">Hapus</a>
-    </li>
 
     <a href="dashboard.php">Kembali ke Dashboard</a>
 </body>

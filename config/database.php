@@ -1,12 +1,12 @@
 <?php
-$host = "localhost";
-$user = "root";  // Ganti sesuai database kalian
-$pass = "";      // Ganti sesuai database kalian
-$dbname = "baca_point";
 
-$conn = new mysqli($host, $user, $pass, $dbname);
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
+$conn = mysqli_connect("localhost","root","","baca_point");
+
+// Periksa koneksi
+if (!$conn) {
+    die("Koneksi database gagal: " . mysqli_connect_error());
 }
+
 ?>

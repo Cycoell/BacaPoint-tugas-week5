@@ -1,3 +1,7 @@
+<?php
+include_once("../config/database.php");
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
