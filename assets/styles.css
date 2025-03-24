@@ -119,6 +119,10 @@ th {
     color: var(--text-color);
 }
 
+td:last-child {
+    text-align: center; /* Memusatkan tombol hanya di kolom terakhir (Aksi) */
+}
+
 /* Tombol aksi */
 .action-button {
     padding: 8px 12px;
@@ -129,6 +133,7 @@ th {
 .add-button {
     background-color: var(--primary-color);
     color: white;
+    text-align: center;
 }
 
 .add-button:hover {
@@ -142,4 +147,30 @@ th {
 
 .delete-button:hover {
     background-color: #c0392b;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between; /* Biar teks di kiri dan tombol di kanan */
+    align-items: center; /* Sejajarkan secara vertikal */
+    margin-bottom: 20px; /* Biar ada jarak dengan tabel */
+}
+
+.menu-container {
+    display: flex;
+    gap: 10px; /* Jarak antara tombol */
+}
+
+.btn {
+    padding: 6px 10px;
+    background-color: #3498db; /* Warna biru */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn:hover {
+    background-color: #2980b9; /* Warna biru lebih gelap saat hover */
 }

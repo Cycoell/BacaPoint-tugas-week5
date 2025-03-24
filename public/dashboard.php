@@ -22,7 +22,15 @@ $result = $conn->query("SELECT * FROM book_list");
 <div class="navbar">BacaPoint - Dashboard</div>
 
 <div class="dashboard-container">
-    <h2>Daftar Buku</h2>
+
+    <div class="dashboard-header">
+        <h2>Daftar Buku</h2>
+        <div class="menu-container">
+            <a href="library.php" class="btn">Library</a>
+            <a href="../process/logout.php" class="btn">Logout</a>
+        </div>
+    </div>
+
     <table>
         <tr>
             <th>Title</th>
@@ -44,7 +52,6 @@ $result = $conn->query("SELECT * FROM book_list");
         <?php } ?>
     </table>
 </div>
-    <a href="library.php">Library</a>
-    <a href="../process/logout.php">Logout</a>
+    
 </body>
 </html>

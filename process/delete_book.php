@@ -17,9 +17,15 @@ if (isset($_GET['book_id'])) {
     $stmt->bind_param("ii", $book_id, $user_id);
     
     if ($stmt->execute()) {
-        echo "Buku berhasil dihapus! <a href='../public/library.php'>Kembali</a>";
+        echo "<script>
+                alert('Buku berhasil dihapus!');
+                window.location.href = '../public/library.php';
+              </script>";
     } else {
-        echo "Gagal menghapus buku!";
+        echo "<script>
+                alert('Gagal menghapus buku!');
+                window.location.href = '../public/library.php';
+              </script>";
     }
 }
 ?>

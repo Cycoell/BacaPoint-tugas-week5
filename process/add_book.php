@@ -12,7 +12,6 @@ if (isset($_GET['title']) && isset($_GET['author']) && isset($_GET['pages']) && 
     $title = $_GET['title'];
     $author = $_GET['author'];
     $pages = $_GET['pages'];
-    $genre = $_GET['genre'];
 
     $check_query = "SELECT * FROM books WHERE user_id = ? AND title = ?";
     $stmt = $conn->prepare($check_query);
@@ -23,11 +22,16 @@ if (isset($_GET['title']) && isset($_GET['author']) && isset($_GET['pages']) && 
     if ($check_result->num_rows == 0) {
         $insert_query = "INSERT INTO books (user_id, title, author, pages, genre, status) VALUES (?, ?, ?, ?, ?, 'sedang dibaca')";
         $stmt = $conn->prepare($insert_query);
-        $stmt->bind_param("issis", $user_id, $title, $author, $pages, $genre);        
+        $stmt->bind_param("issi", $user_id, $title, $author, $pages);
         $stmt->execute();
-        echo "Buku berhasil ditambahkan! <a href='../public/library.php'>Kembali</a>";
+
+        echo "<script>alert('Buku berhasil ditambahkan!'); 
+        window.location.href='../public/library.php';
+        </script>";
     } else {
-        echo "Buku sudah ada di library Anda! <a href='../public/library.php'>Kembali</a>";
+        echo "<script>alert('Buku sudah ada di library Anda!'); 
+        window.location.href='../public/library.php';
+        </script>";
     }
 }
 ?>

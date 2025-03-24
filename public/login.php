@@ -15,6 +15,8 @@ if (isset($_SESSION['user_id'])) {
 </head>
 <body>
 
+<div class="navbar">BacaPoint - Temukan Buku Favoritmu</div>
+
 <div class="container">
     <div class="form-box">
         <h2>Login ke BacaPoint</h2>
