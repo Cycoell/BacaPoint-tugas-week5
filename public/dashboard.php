@@ -38,7 +38,7 @@ $result = $conn->query("SELECT * FROM book_list");
                 <td><?= htmlspecialchars($row['pages']) ?></td>
                 <td><?= htmlspecialchars($row['genre']) ?></td>
                 <td>
-                    <a href="../process/add_book.php?title=<?= urlencode($row['title']) ?>&author=<?= urlencode($row['author']) ?>&pages=<?= $row['pages'] ?>" class="action-button add-button">Tambahkan</a>
+                <a href="../process/add_book.php?title=<?= urlencode($row['title']) ?>&author=<?= urlencode($row['author']) ?>&pages=<?= $row['pages'] ?>&genre=<?= urlencode($row['genre']) ?>" class="action-button add-button">Tambahkan</a>
                 </td>
             </tr>
         <?php } ?>
