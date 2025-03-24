@@ -8,6 +8,20 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
+// Statistik genre buku yang sudah masuk ke library
+$query = "SELECT genre, COUNT(*) as total FROM books WHERE user_id = ? GROUP BY genre";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$genres = [];
+$totals = [];
+
+while ($row = $result->fetch_assoc()) {
+    $genres[] = $row['genre'];
+    $totals[] = $row['total'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +30,7 @@ $user_id = $_SESSION['user_id'];
     <meta charset="UTF-8">
     <title>Library - BacaPoint</title>
     <link rel="stylesheet" href="../assets/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -40,6 +55,7 @@ $user_id = $_SESSION['user_id'];
     $stmt->execute();
     $result = $stmt->get_result();
 
+
     while ($row = $result->fetch_assoc()) {
         echo "<tr>
             <td>{$row['title']}</td>
@@ -63,8 +79,36 @@ $user_id = $_SESSION['user_id'];
     }
     ?>
 </table>
-
 </div>
+<h2>Statistik Buku di Library</h2>
+<canvas id="genreChart" width="400" height="200"></canvas>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const genres = <?= json_encode($genres); ?>;
+    const totals = <?= json_encode($totals); ?>;
+
+    const ctx = document.getElementById('genreChart').getContext('2d');
+    const genreChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: genres,
+            datasets: [{
+                label: 'Jumlah Buku per Genre',
+                data: totals,
+                backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: { y: { beginAtZero: true } }
+        }
+    });
+</script>
+
 
 </body>
 </html>
